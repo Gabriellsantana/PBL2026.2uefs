@@ -1,0 +1,7 @@
+Documento criado para auxilio com sintaxe em python 
+
+todos arquivos que não so .py e txt , foi aducionado por comandos secundarios que pesquisei para cria um execultave pythoon
+
+print("idade: ",end="");
+
+O end define o que o print coloca no final da saída. Por padrão ele coloca uma quebra de linha (\n). Eu usei end="" para não quebrar a linha, deixando o usuário digitar a resposta na mesma linha da mensagem.”
