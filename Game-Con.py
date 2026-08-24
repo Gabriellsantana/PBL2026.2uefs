@@ -28,7 +28,6 @@ if idade >= 1 and idade <= 9:
 
 if idade >=10 and idade <=17:
     print("\nCategoria:Adolecentes");
-    print("Categoria:Adolecentes");
     print("Valor:$15,00");
     jovens=+1;
 

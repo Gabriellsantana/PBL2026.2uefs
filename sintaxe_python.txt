@@ -1,6 +1,6 @@
 Documento criado para auxilio com sintaxe em python 
 
-todos arquivos que não so .py e txt , foi aducionado por comandos secundarios que pesquisei para cria um execultave pythoon
+todos arquivos que não so .py e txt , foi aducionado por comandos secundarios que pesquisei para cria um execultave pythoon / para tulaizar o exe quando modifica o py , porque ele não pucha direto  // terminal - pyinstaller --onefile Game-Con.py
 
 print("idade: ",end="");
 
