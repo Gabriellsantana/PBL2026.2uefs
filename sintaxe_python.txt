@@ -1,7 +1,31 @@
 Documento criado para auxilio com sintaxe em python 
 
-todos arquivos que não so .py e txt , foi aducionado por comandos secundarios que pesquisei para cria um execultave pythoon / para tulaizar o exe quando modifica o py , porque ele não pucha direto  // terminal - pyinstaller --onefile Game-Con.py
+todos arquivos que não so .py e txt , foi aducionado por comandos secundarios que pesquisei para cria um execultave pythoon / para atulaizar o exe quando modifica o py , porque ele não pucha direto  // terminal - pyinstaller --onefile Game-Con.py
 
 print("idade: ",end="");
 
 O end define o que o print coloca no final da saída. Por padrão ele coloca uma quebra de linha (\n). Eu usei end="" para não quebrar a linha, deixando o usuário digitar a resposta na mesma linha da mensagem.”
+
+
+
+if idade >= 1 and idade <= 9:
+    print("\nCategoria:Crianças");
+    print("Valor:Gratis");
+    kids=+1;
+
+if idade >=10 and idade <=17:
+    print("\nCategoria:Adolecentes");
+    print("Valor:$15,00");
+    jovens=+1;
+
+if idade >=18:
+    print("\nCategoria:Adultos");
+    print("Valor:$40,00\n\n");
+    desconto=int(input("Desconto:[1]Sim  [2]não: "));
+    if desconto ==1:#PRECISA FZR VERIFICAÇÃO DA MATRICULA AINDA
+         print("\nCategoria:Adultos/Estudande Universiatrio");
+         print("Valor:$20,00");
+    else:
+        print("\nCategoria:Adultos");
+        print("Valor:$40,00");
+                                   
