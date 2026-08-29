@@ -11,6 +11,8 @@ idade:int;
 senha:str;
 contLotacao:int;
 contLotacao=0;
+dinheiro:float;
+troco:float
 #menu inicial
 print("-------------Bem Vindo Organização do Cuca-------------");
 print("Infomer Capacidade máxima: ",end="");
@@ -34,7 +36,7 @@ while opcao!= "2": #laço principal de repetição do menu
            print("Idade do visitante: ",end="");
            idade = int(input());
 
-           if idade >=1 and idade <=9:
+           if idade >=1 and idade <=9:    
               print("INGRESSO VENDIDO");
               print("Categira:Kids");
               print("Valor:Grâtis\n");
@@ -43,11 +45,22 @@ while opcao!= "2": #laço principal de repetição do menu
               print("Capacidade local:%d"%lotacaoMax);
            
            elif idade >=10 and idade <=17:  
-              print("INGRESSO VENDIDO");
-              print("Categoria:Adolecente");
-              print("Valor:15$\n");
-              contLotacao+=1
+              #opreçãofinceira
+              pagamento=float(input("Digite o valor pago $:"));
+              if pagamento >= 15.00:#validação pagamento menores que valor do ingresso
+               troco = pagamento-15.00;
+               print("INGRESSO VENDIDO");
+               print("Categoria:Adolecente");
+               print("Valor:15$");
+               print("troco:%.2f"%troco);
+               contLotacao+=1
 
+               #informativos
+               print("\ningressos vendidos:%d"%contLotacao);
+               print("Capacidade local:%d"%lotacaoMax);
+              else:
+                 print("Pagamento insuficiente!");
+              
            elif idade >=18:
               print("Estudande Universitario Uefs:")  
               uefs=int(input("[1]sim----[2]Não"));
@@ -55,6 +68,7 @@ while opcao!= "2": #laço principal de repetição do menu
                  print("INGRESSSO VENDIDO");
                  print("Categoria:Estudante");
                  print("Valor:20$\n");
+
                  contLotacao+=1
                  print("ingressos vendidos:%d"%contLotacao);
                  print("Capacidade local:%d"%lotacaoMax);
