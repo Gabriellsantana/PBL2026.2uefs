@@ -82,7 +82,7 @@ while opcao!= "2": #laço principal de repetição do menu
 
                  if len(matricula) == 9 and matricula.isdigit():#aqui vejo requisitos matricula
                   print("\nCATEGORIA:ESTUDANTE:PREÇO:R$20,00\n");
-                  pagamento=float(input("Digite o valor pago $: "));
+                  pagamento=float(input("Digite o valor pago $: ").replace(",","."));
                   if pagamento >=20:#aqui ainda verifico o valordo pagamento
                    troco =pagamento -20;
                    print("\nINGRESSSO VENDIDO");
@@ -102,7 +102,7 @@ while opcao!= "2": #laço principal de repetição do menu
                   
                 case"2":#se não for estudande
                  print("\nCATEGORIA:ADULTO:PREÇO:R$40,00\n");
-                 pagamento=float(input("Digite o valor pago $:"));
+                 pagamento=float(input("Digite o valor pago $:").replace(",","."));
                  if pagamento >= 40.00:#validação pagamento menores que valor do 
                   troco = pagamento-40.00;
                   print("\nINGRESSO VENDIDO");
