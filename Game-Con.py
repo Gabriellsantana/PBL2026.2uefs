@@ -5,7 +5,7 @@ funcionario:str;
 kids=0;
 adultos=0.0;
 jovens=0.0;
-universitystudent:float;
+universitystudent=0.0;
 lotacaoMax=0;
 idade:int;
 senha:str;
@@ -13,6 +13,9 @@ contLotacao:int;
 contLotacao=0;
 dinheiro=0.0;
 troco:float
+quantJovens=0;
+quantAdultos=0;
+quantEstudantes=0;
 #menu inicial
 print("\n[      Adiministrado do Cuca     ]\n");
 print("Infomer Capacidade Máxima do Dia: ",end="");#
@@ -57,7 +60,8 @@ while opcao!= "2": #laço principal de repetição do menu
                print("troco R$:%.2f"%troco);
                contLotacao+=1
                dinheiro+=15.00;
-               jovens+=15.00
+               jovens+=15.00;
+               quantJovens+1;
                #informativos
                print("\ningressos vendidos:%d"%contLotacao);
                print("Capacidade local:%d"%lotacaoMax);
@@ -66,17 +70,17 @@ while opcao!= "2": #laço principal de repetição do menu
                   
            elif idade >=18:#//////////////ADULTO//////////////////////////
               uefs ="";
-              while uefs !="2":
+              while uefs != "1" and uefs != "2":
                print("Desconto Estudantil para Universitario Uefs %:"); 
-               uefs=input("\n[1]=sim % Não=[2]\n");
+               uefs=input("\n[1]=sim % Não=[2] ");
                input("\nPressione ENTER para confirmar....")
                os.system("cls")
                match uefs:
                 case "1":#se for estudante
-                 matricula=input("Matricula:");#se sim aqui vem a matricula
+                 matricula=input("Matricula: ");#se sim aqui vem a matricula
 
                  if len(matricula) == 9 and matricula.isdigit():#aqui vejo requisitos matricula
-                  pagamento=float(input("Digite o valor pago $:"));
+                  pagamento=float(input("Digite o valor pago $: "));
                   if pagamento >=20:#aqui ainda verifico o valrdo pagamento
                    troco =pagamento -20;
                    print("INGRESSSO VENDIDO");
@@ -86,6 +90,7 @@ while opcao!= "2": #laço principal de repetição do menu
                    contLotacao+=1
                    dinheiro+=20.00;
                    universitystudent+=20.00
+                   quantEstudantes+=1;
                    print("\ningressos vendidos:%d"%contLotacao);
                    print("Capacidade local:%d"%lotacaoMax);
                   else:
@@ -105,6 +110,7 @@ while opcao!= "2": #laço principal de repetição do menu
                   contLotacao+=1;
                   dinheiro+=40.00;
                   adultos+=40.00;
+                  quantAdultos+=1;
                   print("\ningressos vendidos:%d"%contLotacao);
                   print("Capacidade local:%d"%lotacaoMax);
                #//////////////////////ADULTO////////////////////////////
@@ -126,33 +132,42 @@ while opcao!= "2": #laço principal de repetição do menu
 
     #premiação
 
-    if dinheiro <=300.00:  
-        print("\o/ Premiaçoes do DIa \o/");
-        premiacao = dinheiro*0.10;
-        valor1 =premiacao*0.50;valor2=premiacao*0.30;valor3=premiacao*0.20
-        print("1 lugar R$:%.2f\n2 lugar R$:%.2f\n 3 lugar R$:%.2f"%(valor1,valor2,valor3));
-    if dinheiro >=300.01 and dinheiro <=700.00:  
-         print("\o/ Premiaçoes do DIa \o/");
-         premiacao = dinheiro*0.10;
-         valor1 =premiacao*0.50;valor2=premiacao*0.30;valor3=premiacao*0.20
-         print("1 lugar R$:%.2f\n2 lugar R$:%.2f\n 3 lugar R$:%.2f"%(valor1,valor2,valor3));
-    if dinheiro >=700.00:  
-         print("\o/ Premiaçoes do DIa \o/");
-         premiacao = dinheiro*0.10;
-         valor1 =premiacao*0.50;valor2=premiacao*0.30;valor3=premiacao*0.20
-         print("1 lugar R$:%.2f\n2 lugar R$:%.2f\n 3 lugar R$:%.2f"%(valor1,valor2,valor3));
+if dinheiro <=300.00:  
+   print("\o/ Premiaçoes do DIa \o/");
+   premiacao = dinheiro*0.10;
+   valor1 =premiacao*0.50;valor2=premiacao*0.30;valor3=premiacao*0.20
+   print("1 lugar R$:%.2f\n2 lugar R$:%.2f\n 3 lugar R$:%.2f"%(valor1,valor2,valor3));
+if dinheiro >=300.01 and dinheiro <=700.00:  
+   print("\o/ Premiaçoes do DIa \o/");
+   premiacao = dinheiro*0.15;
+   valor1 =premiacao*0.50;valor2=premiacao*0.30;valor3=premiacao*0.20
+   print("1 lugar R$:%.2f\n2 lugar R$:%.2f\n 3 lugar R$:%.2f"%(valor1,valor2,valor3));
+if dinheiro >=700.00:  
+   print("\o/ Premiaçoes do DIa \o/");
+   premiacao = dinheiro*0.20;
+   valor1 =premiacao*0.50;valor2=premiacao*0.30;valor3=premiacao*0.20
+   print("1 lugar R$:%.2f\n2 lugar R$:%.2f\n 3 lugar R$:%.2f"%(valor1,valor2,valor3));
     
     
 input("\nPressione ENTER para [DETALHES DO CAIXA$]...")
 os.system("cls")
-
-print("Detalamento Caixa");
-print("\nCategoria Total:\n");
+print("$--------------[Relatorio]--------------$")
+print("\nDetalhamento Caixa");
+print("Categoria Total:\n");
 print("Jovens R$:%.2f.........."%jovens);
 print("Adultos R$:%.2f........."%adultos);
 print("Estudntes Uefs R$:%.2f.."%universitystudent)
 print("Não Pagantes:%d........."%kids);
-print("\n\nTotal do dia R$:%.2f"%dinheiro)
+
+print("Ingressos vendido por Categoria")
+print("Criança %d"%kids);
+print("Jovens %d"%quantJovens);
+print("Adultos %d"%quantAdultos);
+print("Estudantes %d"%quantEstudantes)
+
+print("\n\n\nTotal de Pagantes %d"%contLotacao);
+print("Média de pagantes R$:%.2f"%(dinheiro/contLotacao));
+print("Total do dia R$:%.2f"%dinheiro);
 
 
          
