@@ -6,7 +6,7 @@ O end define o que o print coloca no final da saída. Por padrão ele coloca uma
 
 OBS:Como  a Materia MI é integrada com algoritmo 1 , a professora resaltu de fazer  saida e entrada de dados com print e input , porque é forma padrão das maiorias das linguagem , sabendo que ptyhon permitr imprimir um texto com comando entrada de dados "input" e por isso também a declaaçaõ devarivel acima do código que não um necesidade do python
 
-Códiogo: comando  que foi pesquisados , para resolver problemas epecificos e otimizados:(len e isdigit)  len = comprimento  isdigit retorna true ou false caso uma var seja formada apenas por número ou não 
+Códiogo: metodos   que foi pesquisados , para resolver problemas epecificos e otimizados:(len e isdigit)  len = comprimento  isdigit retorna true ou false caso uma var seja formada apenas por número ou não 
 
 no len - logicamente poderia valida a quantida de caracterios digitados com for pra percorre logicamente esse string e ver quantos caracterios tem ali matricula = 
 
@@ -22,6 +22,5 @@ print("Quantidade de caracteres:", contador)
 
 ai eu jogaria dentro de outro if para valida de contador == 9;
 
-
-Maior dificulade no momento identação
+replace - metetodo usa para tratar virgular nos valores float , antende de linguagem transforma e float o replace caso user tenha digitado " , "  troca para "."
                                    
