@@ -2,19 +2,19 @@ import os #importando bibiotleca para cls
 
 #Variaveis supostamente declaradas 
 funcionario:str;
-kids:float;
-adultos:float;
-jovens:float;
+kids=0;
+adultos=0.0;
+jovens=0.0;
 universitystudent:float;
-lotacaoMax:int;
+lotacaoMax=0;
 idade:int;
 senha:str;
 contLotacao:int;
 contLotacao=0;
-dinheiro:float;
+dinheiro=0.0;
 troco:float
 #menu inicial
-print("\n[#############Adiministrado do Cuca#############]\n");
+print("\n[      Adiministrado do Cuca     ]\n");
 print("Infomer Capacidade Máxima do Dia: ",end="");#
 lotacaoMax = int(input());
 senha=input("Crie um senha para o dia: ");
@@ -63,13 +63,16 @@ while opcao!= "2": #laço principal de repetição do menu
                print("Capacidade local:%d"%lotacaoMax);
               else:
                  print("Pagamento insuficiente!");#//////ADOLECENTE///////////////
-              
+                  
            elif idade >=18:#//////////////ADULTO//////////////////////////
-              print("Estudande Universitario Uefs:"); 
-              uefs=int(input("[1]sim----[2]Não \n"));
-              os.system("cls");
-
-              if (uefs == 1):#aqui verifico se é estudante
+              uefs ="";
+              while uefs !="2":
+               print("Desconto Estudantil para Universitario Uefs %:"); 
+               uefs=input("\n[1]=sim % Não=[2]\n");
+               input("\nPressione ENTER para confirmar....")
+               os.system("cls")
+               match uefs:
+                case "1":#se for estudante
                  matricula=input("Matricula:");#se sim aqui vem a matricula
 
                  if len(matricula) == 9 and matricula.isdigit():#aqui vejo requisitos matricula
@@ -86,24 +89,27 @@ while opcao!= "2": #laço principal de repetição do menu
                    print("\ningressos vendidos:%d"%contLotacao);
                    print("Capacidade local:%d"%lotacaoMax);
                   else:
-                      print("Pagamento insuficiente!")##########estudante############
+                      print("Pagamento insuficiente!");##########estudante############
                  else:
                   print("Matricula invalida");#aqui ainda indico se matricula foi errada
                   
-              else:#fim controle estudande
+                case"2":#se não for estudande
+                 print("Não é Estudante")
                  pagamento=float(input("Digite o valor pago $:"));
                  if pagamento >= 40.00:#validação pagamento menores que valor do 
                   troco = pagamento-40.00;
-                  print("INGRESSO VENDIDO");
+                  print("\nINGRESSO VENDIDO");
                   print("Categoria:Adulto");
                   print("Valor:R$ 40.00");
                   print("troco R$:%.2f"%troco);
                   contLotacao+=1;
                   dinheiro+=40.00;
-                  adultos+=40.00
+                  adultos+=40.00;
                   print("\ningressos vendidos:%d"%contLotacao);
                   print("Capacidade local:%d"%lotacaoMax);
                #//////////////////////ADULTO////////////////////////////
+                case _:
+                  print("Valor inválido. Insira um número válido");
 
         else:#fim Lotação maxima !!!!!!!!!!!!!!!!!!fechamneto!!!!!!!!!!!!!!!!!!!!!!
             print("Lotação Maxima Atingida Obrigado por Hoje :)\n");
@@ -137,6 +143,16 @@ while opcao!= "2": #laço principal de repetição do menu
          print("1 lugar R$:%.2f\n2 lugar R$:%.2f\n 3 lugar R$:%.2f"%(valor1,valor2,valor3));
     
     
+input("\nPressione ENTER para [DETALHES DO CAIXA$]...")
+os.system("cls")
+
+print("Detalamento Caixa");
+print("\nCategoria Total:\n");
+print("Jovens R$:%.2f.........."%jovens);
+print("Adultos R$:%.2f........."%adultos);
+print("Estudntes Uefs R$:%.2f.."%universitystudent)
+print("Não Pagantes:%d........."%kids);
+print("\n\nTotal do dia R$:%.2f"%dinheiro)
 
 
          
