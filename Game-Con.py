@@ -16,7 +16,11 @@ troco:float
 quantJovens=0;
 quantAdultos=0;
 quantEstudantes=0;
-#menu inicial
+quantPagantes =0;
+opcaoPagamento =0;
+complementoP=0.0;
+
+#menu inicial/que determina pin e lotação
 print("\n[      Adiministrado do Cuca     ]\n");
 print("Infomer Capacidade Máxima do Dia: ",end="");#
 lotacaoMax = int(input());
@@ -25,41 +29,43 @@ senha=input("Crie um senha para o dia: ");
   
 os.system("cls") #limpa tela 
 
-opcao =""
-while opcao!= "2": #laço principal de repetição do menu
-    print("-----------==[Entradas Visitante]==-----------");
-    print("[1]Vender>");
-    print("[2]Encerra>\n");
-    opcao =input(">")
+opcao ="" 
+while opcao!= "2":
+    print("\n-----------==[Entradas Visitante]==-----------");
+    print("\033[32m[1]Vender>\033[0m");
+    print("\033[36m[2]Encerra>\033[0m\n");
+    opcao =input("\033[34m>_\033[0m")
     os.system("cls") 
 
     match opcao:
      case "1":
-        if contLotacao < lotacaoMax:#!!!!!!!!!!!!!inicio!!!!!!!!!!!!!!!!!!!!!!!!
+        if contLotacao < lotacaoMax:#>>>>>>>>>inicio_LAÇO<<<<<<<<<<<<
            print("Idade do visitante: ",end="");
-           idade = int(input());
+           idade = int(input("\033[34m>_\033[0m"));
 
-           if idade >=1 and idade <=9:#Criança///////////CRIANÇA///////////////    
-              #não precisa de operção finaceria free
-              print("INGRESSO VENDIDO");
+           if idade >=1 and idade <=9:#>>>>>INICIO_SESSÃO_CRIANÇA<<<<<<<<<<<<<<
+              print("\033[32mINGRESSO VENDIDO\033[0m");
               print("Categoria:Kids");
               print("Valor:R$ 0.00\n");
+
+              print("ingressos vendidos:%d"%contLotacao);
+              print("Capacidade local:%d"%lotacaoMax);
               contLotacao+=1;
               kids+=1
-              print("ingressos vendidos:%d"%contLotacao);
-              print("Capacidade local:%d"%lotacaoMax);#///////CRIANÇA///////////
+              #>>>>>>>>>>>FIM_SESSÃO_CRIANÇA<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
            
-           elif idade >=10 and idade <=17:#//////////ADOLECENTE//////////////////  
+           elif idade >=10 and idade <=17:#>>>>>>>>INICIOSESSÂOADOLECENTE<<<<<<<<
               #opreçãofinceira
               print("\nCATEGORIA:JOVENS:PREÇO:R$15,00\n");
               pagamento=float(input("Digite o valor pago $:").replace(",","."));
               if pagamento >= 15.00:#validação pagamento menores que valor do ingresso
                troco = pagamento-15.00;
-               print("\nINGRESSO VENDIDO");
+               print("\n\033[32mINGRESSO VENDIDO\033[0m");
                print("Categoria:Adolecente");
-               print("Valor:R$ 15,00");
+               print("\033[33mValor:R$ 15,00\033[0m");
                print("troco R$:%.2f"%troco);
                quantJovens+=1;
+               quantPagantes+=1;
                contLotacao+=1
                dinheiro+=15.00;
                jovens+=15.00;
@@ -67,57 +73,140 @@ while opcao!= "2": #laço principal de repetição do menu
                print("\ningressos vendidos:%d"%contLotacao);
                print("Capacidade local:%d"%lotacaoMax);
               else:
-                 print("Pagamento insuficiente!");#//////ADOLECENTE///////////////
-                  
-           elif idade >=18:#//////////////ADULTO//////////////////////////
-              uefs ="";
-              while uefs != "1" and uefs != "2":
-               print("Desconto Estudantil para Universitario Uefs %:"); 
-               uefs=input("\n[1]=sim % Não=[2] ");
-               input("\nPressione ENTER para confirmar....");
-               os.system("cls")
-               match uefs:
-                case "1":#se for estudante
-                 matricula=input("Matricula: ");#se sim aqui vem a matricula
+                 print("Pagamento insuficiente!");
+                 opcaoPagamento = ""
+                 while opcaoPagamento !="1" and opcaoPagamento !="2":
+                   print("\n\n[1]Completar pagamento");
+                   print("[2]Cancelar compra\n");
+                   opcaoPagamento=input("\033[34m>_\033[0m");
+                   os.system("cls");
+                   if opcaoPagamento !="1" and opcaoPagamento !="2":
+                     print("\033[91mopção invalida\033[0m");
+                 
+                 if opcaoPagamento =="1":
+                   print("Valor restante: R$ %.2f" % (15-pagamento));
+                   complementoP=float(input("Digite o valor restante: R$ ").replace(",", "."))
 
-                 if len(matricula) == 9 and matricula.isdigit():#aqui vejo requisitos matricula
+                   if (pagamento+complementoP) >= 15.00:#>>>verificando se soma do complemento e pagamento é maior que valor minimo
+                    troco = (pagamento + complementoP) - 15;
+                    print("\n\033[32mINGRESSO VENDIDO\033[0m");
+                    print("Categoria:Adolecente");
+                    print("Valor:\033[33mR$ 15,00\033[0m");
+                    print("troco R$:%.2f"%troco);
+
+                    #>>>>>>>>variaveis acumaladoras de dados<<<<<<<
+                    quantJovens+=1;
+                    quantPagantes+=1;
+                    contLotacao+=1
+                    dinheiro+=15.00;
+                    jovens+=15.00;
+                    #>>>>>>>>>>>>>>FIM DA SESSÃO ADOLECENTE<<<<<<<<<<<<<<
+                   else:
+                     print("Pagamento insuficiente/VENDA CANCELADA");
+           elif idade >=18:#>>>>>>>INICIO DA SESSÃO ADULTO<<<<<<<<<<<<<<
+              uefs ="";
+              while uefs != "1" and uefs != "2":#>>>>VERIFICAÇÃO DE ADULTO UEFS
+               print("Desconto Estudantil para Universitario Uefs %:"); 
+               uefs=input("\n[1]>sim  Não<[2]\n");
+               input("\nPressione ENTER para confirmar....");
+               os.system("cls");
+
+               match uefs:#>>>>>>INICIO DA SESSÃO ESTUDANTE<<<<<<<<<<<<<<<<
+                case "1": 
+                 matricula=input("Matricula: ");
+                 if len(matricula) == 9 and matricula.isdigit():#>>MATRICULA<<
                   print("\nCATEGORIA:ESTUDANTE:PREÇO:R$20,00\n");
                   pagamento=float(input("Digite o valor pago $: ").replace(",","."));
                   if pagamento >=20:#aqui ainda verifico o valordo pagamento
                    troco =pagamento -20;
-                   print("\nINGRESSSO VENDIDO");
+                   print("\n\033[32mINGRESSO VENDIDO\033[0m");
                    print("Categoria:Estudante");
-                   print("Valor:R$ 20.00\n");  
+                   print("\033[33mValor:R$ 20,00\033[0m\n");  
                    print("Troco:R$ %.2f"%troco);
                    quantEstudantes+=1
+                   quantPagantes+=1;
                    contLotacao+=1
                    dinheiro+=20.00;
                    universitystudent+=20.00
                    print("\ningressos vendidos:%d"%contLotacao);
                    print("Capacidade local:%d"%lotacaoMax);
                   else:
-                      print("Pagamento insuficiente!");##########estudante############
+                      print("Pagamento insuficiente!");
+                      opcaoPagamento = ""
+                      while opcaoPagamento !="1" and opcaoPagamento !="2":
+                        print("\n\n[1]Completar pagamento");
+                        print("[2]Cancelar compra");
+                        opcaoPagamento=input("\033[34m>_\033[0m");
+                        os.system("cls");
+                        if opcaoPagamento !="1" and opcaoPagamento !="2":
+                         print("\033[91mopção invalida\033[0m");
+                      if opcaoPagamento =="1":
+                         print("Valor restante: R$ %.2f" % (20-pagamento));
+                         complementoP=float(input("Digite o valor restante: R$ ").replace(",", "."))
+                         if (pagamento+complementoP) >= 20.00:#>>>verificando se soma do complemento e pagamento é maior que valor minimo
+                          troco = (pagamento + complementoP) - 20;
+                          print("\n\033[32mINGRESSO VENDIDO\033[0m");
+                          print("Categoria:Estudante");
+                          print("Valor:\033[33mR$ 20,00\033[0m");
+                          print("troco R$:%.2f"%troco);
+                          #>>>>>>>>variaveis acumaladoras de dados<<<<<<<
+                          quantEstudantes+=1
+                          quantPagantes+=1;
+                          contLotacao+=1
+                          dinheiro+=20.00;
+                          universitystudent+=20.00
+                         else:
+                          print("Pagamento insuficiente/VENDA CANCELADA")
+                     
                  else:
-                  print("Matricula invalida");#aqui ainda indico se matricula foi errada
+                  print("Matricula invalida");#>>>>>>>>>FIM SESSÃO ESTUDANTE<<<
                   
-                case"2":#se não for estudande
+                case"2":#>>>>>>>>>INICIO_SESSÃO ADULTO<<<<<<<<<<<<<<<<<
                  print("\nCATEGORIA:ADULTO:PREÇO:R$40,00\n");
                  pagamento=float(input("Digite o valor pago $:").replace(",","."));
                  if pagamento >= 40.00:#validação pagamento menores que valor do 
                   troco = pagamento-40.00;
-                  print("\nINGRESSO VENDIDO");
+                  print("\n\033[32mINGRESSO VENDIDO\033[0m");
                   print("Categoria:Adulto");
-                  print("Valor:R$ 40.00");
+                  print("\033[33mValor:R$ 40,00\033[0m");
                   print("troco R$:%.2f"%troco);
                   quantAdultos+=1;
+                  quantPagantes+=1;
                   contLotacao+=1;
                   dinheiro+=40.00;
                   adultos+=40.00;
                   print("\ningressos vendidos:%d"%contLotacao);
                   print("Capacidade local:%d"%lotacaoMax);
-               #//////////////////////ADULTO////////////////////////////
-                case _:
-                  print("Valor inválido. Insira um número válido");
+                 else:
+                   opcaoPagamento = "";
+                   while opcaoPagamento !="1" and opcaoPagamento !="2":
+                     print("\n\n[1]Completar pagamento");
+                     print("[2]Cancelar compra");
+                     opcaoPagamento=input("\033[34m>_\033[0m");
+                     os.system("cls");
+                     if opcaoPagamento !="1" and opcaoPagamento !="2":
+                      print("\033[91mopção invalida\033[0m");
+                   if opcaoPagamento =="1":
+                      print("Valor restante: R$ %.2f" % (40-pagamento));
+                      complementoP=float(input("Digite o valor restante: R$ ").replace(",", "."))
+                      if (pagamento+complementoP) >= 40.00:#>>>verificando se soma do complemento e pagamento é maior que valor minimo
+                       troco = (pagamento + complementoP) - 40;
+                       print("\n\033[32mINGRESSO VENDIDO\033[0m");
+                       print("Categoria:Adulto");
+                       print("Valor:\033[33mR$ 40,00\033[0m");
+                       print("troco R$:%.2f"%troco);
+                       #>>>>>>>>variaveis acumaladoras de dados<<<<<<<
+                       quantAdultos+=1;
+                       quantPagantes+=1;
+                       contLotacao+=1;
+                       dinheiro+=40.00;
+                       adultos+=40.00;            
+                      else:
+                        print("Pagamento insuficiente/VENDA CANCELADA");
+                 #>>>>>>>>>>>>>>>>>>>FIM SESSÃO ADULTO<<<<<<<<<<<<<<<<<<<<<
+
+                case _:#outrocaso
+                  print("\033[91mValor inválido. Insira um número válido\033[0m");
 
         else:#fim Lotação maxima !!!!!!!!!!!!!!!!!!fechamneto!!!!!!!!!!!!!!!!!!!!!!
             print("Lotação Maxima Atingida Obrigado por Hoje :)\n");
@@ -126,20 +215,18 @@ while opcao!= "2": #laço principal de repetição do menu
           if confirmaSenha == senha:
              print("$--Caixa Encerrado--$\n");
           else:
-             print("Senha Invalida Contantar Administrador\n");
+             print("\033[31mSenha Invalida Contantar Administrador\033[0m\n");
              print("Tente Novamente")
              opcao ="" #limpei a varivel do meu laço para não ecerra quando adm erra senha 
      case _:#outro caso  
-          print("[Valor inválido. Insira um número válido]");
+          print("\033[31m[Valor inválido. Insira um número válido]\033[0m");
 
-    #premiação
-
-if dinheiro <=300.00:  
+if dinheiro <=300.00:  #sessão premiação 
    print("Premiaçoes do DIa ");
    premiacao = dinheiro*0.10;
    valor1 =premiacao*0.50;valor2=premiacao*0.30;valor3=premiacao*0.20
    print("1 lugar R$:%.2f\n2 lugar R$:%.2f\n 3 lugar R$:%.2f"%(valor1,valor2,valor3));
-if dinheiro >=300.01 and dinheiro <=700.00:  
+if dinheiro >=300.01 and dinheiro <700.00:  
    print("\o/ Premiaçoes do DIa \o/");
    premiacao = dinheiro*0.15;
    valor1 =premiacao*0.50;valor2=premiacao*0.30;valor3=premiacao*0.20
@@ -150,10 +237,9 @@ if dinheiro >=700.00:
    valor1 =premiacao*0.50;valor2=premiacao*0.30;valor3=premiacao*0.20
    print("1 lugar R$:%.2f\n2 lugar R$:%.2f\n 3 lugar R$:%.2f"%(valor1,valor2,valor3));
     
-    
-input("\nPressione ENTER para >>>DETALHES DO CAIXA$<<<<")
+input("\nPressione ENTER para >>>DETALHES DO CAIXA$<<<<");
 os.system("cls")
-print("$-----$--$-----$--[Relatorio]--$-----$--$-----$")
+print("$-----$--$-----$--[Relatorio]--$-----$--$-----$");
 print("\nDetalhamento Caixa");
 
 print("\nValores por Categoria");
@@ -168,8 +254,8 @@ print("Jovens %d"%quantJovens);
 print("Adultos %d"%quantAdultos);
 print("Estudantes %d"%quantEstudantes)
 
-print("\n\nTotal de Pagantes %d"%contLotacao);
-print("Média de pagantes R$:%.2f"%(dinheiro/contLotacao));
+print("\n\nTotal de Pagantes %d"%quantPagantes);
+print("Média de pagantes R$:%.2f"%(dinheiro/quantPagantes));
 print("Total do dia R$:%.2f"%dinheiro);
 
 

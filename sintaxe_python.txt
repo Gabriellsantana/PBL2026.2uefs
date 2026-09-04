@@ -23,4 +23,9 @@ print("Quantidade de caracteres:", contador)
 ai eu jogaria dentro de outro if para valida de contador == 9;
 
 replace - metetodo usa para tratar virgular nos valores float , antende de linguagem transforma e float o replace caso user tenha digitado " , "  troca para "."
+
+As cores utilizadas na interface textual do programa são implementadas por meio de sequências de escape ANSI. Essas sequências permitem enviar comandos de formatação ao terminal, possibilitando alterações na cor e no estilo dos caracteres exibidos. Esse mecanismo está relacionado ao padrão ECMA-48 (também conhecido como ISO/IEC 6429), que especifica funções de controle para terminais.
+
+
+
                                    
